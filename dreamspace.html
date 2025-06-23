@@ -11,55 +11,32 @@
       padding: 0;
       box-sizing: border-box;
     }
-.floating-text {
-  position: fixed;
-  top: 40px;
-  right: 40px;
-  font-size: 1.8rem;
-  font-family: 'Playfair Display', cursive;
-  color: #dda0dd; /* pastel lavender */
-  text-shadow: 0 0 10px #f3c6f1, 0 0 20px #f3c6f1;
-  opacity: 0.9;
-  animation: floatUpDown 4s ease-in-out infinite;
-  pointer-events: none;
-  z-index: 1000;
-}
-
-@keyframes floatUpDown {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-body {
+    body {
       font-family: 'Quicksand', sans-serif;
       background: linear-gradient(to right, #e0f7fa, #fce4ec);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
       color: #444;
+      padding: 20px;
       min-height: 100vh;
     }
+
     h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 2.7rem;
+      font-size: 2rem;
       color: #e28aa5;
+      text-align: center;
       margin-bottom: 20px;
     }
 
     .main {
-      display: grid;
-      grid-template-columns: 1fr 3fr;
-      gap: 30px;
-      width: 100%;
-      max-width: 1400px;
-      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    @media (min-width: 768px) {
+      .main {
+        flex-direction: row;
+      }
     }
 
     .left, .tasks {
@@ -67,85 +44,45 @@ body {
       border-radius: 20px;
       padding: 20px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .tasks {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      position: relative;
-    }
-
-    .bottom-right-quote {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      color: #6a5f78;
-      max-width: 300px;
-    }
-
-    .bottom-right-quote .signature {
-      font-size: 0.9rem;
-      text-align: right;
-      color: #aaa;
+      flex: 1;
     }
 
     #clock {
-      font-size: 2rem;
-      color: #6d4c41;
+      font-size: 1.5rem;
       text-align: center;
-      margin-bottom: 20px;
+      color: #6d4c41;
       animation: glow 2s infinite alternate;
+      margin-bottom: 20px;
     }
 
     @keyframes glow {
-      from {
-        text-shadow: 0 0 10px #ffb6c1;
-      }
-      to {
-        text-shadow: 0 0 20px #e91e63;
-      }
+      from { text-shadow: 0 0 10px #ffb6c1; }
+      to { text-shadow: 0 0 20px #e91e63; }
     }
 
-    .calendar-section {
-      margin-top: auto;
-    }
-
-    .calendar-header {
-      font-size: 1.1rem;
+    .calendar-header, .calendar-label {
       text-align: center;
-      color: #4a4a4a;
       margin-bottom: 10px;
-      font-weight: 600;
     }
 
     .calendar-label {
-      text-align: center;
       font-weight: bold;
-      color: #555;
-      margin-bottom: 10px;
       font-size: 1.2rem;
+      color: #555;
     }
 
     .calendar {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      gap: 10px;
-      text-align: center;
-      font-size: 14px;
+      gap: 5px;
+      font-size: 0.9rem;
     }
 
     .day {
-      padding: 10px;
-      border-radius: 10px;
       background: #dcedc8;
+      padding: 10px;
+      border-radius: 8px;
       cursor: pointer;
-      transition: 0.3s;
     }
 
     .day:hover {
@@ -155,6 +92,69 @@ body {
     .locked {
       pointer-events: none;
       background: #eee;
+      color: #aaa;
+    }
+
+    .affirmation-log {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      text-align: center;
+      color: #666;
+    }
+
+    .tasks input[type="text"] {
+      width: calc(100% - 100px);
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      margin-right: 10px;
+      background: #e0f7fa;
+    }
+
+    #addBtn {
+      padding: 10px;
+      border: none;
+      background: #b2dfdb;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    ul {
+      margin-top: 20px;
+      list-style: none;
+    }
+
+    li {
+      background: #ede7f6;
+      padding: 10px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    li.done {
+      text-decoration: line-through;
+      background: #e6f7e6;
+      color: #888;
+    }
+
+    li input[type="checkbox"] {
+      margin-right: 10px;
+      transform: scale(1.3);
+    }
+
+    .bottom-right-quote {
+      margin-top: 30px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: #6a5f78;
+    }
+
+    .signature {
+      text-align: right;
+      font-size: 0.85rem;
       color: #aaa;
     }
 
@@ -175,64 +175,20 @@ body {
       text-align: center;
     }
 
-    .affirmation-log {
-      margin-top: 20px;
-      font-size: 0.95rem;
-      color: #6f6f6f;
-      font-style: italic;
-      text-align: center;
+    .floating-text {
+      position: fixed;
+      top: 30px;
+      right: 20px;
+      font-size: 1.3rem;
+      color: #dda0dd;
+      text-shadow: 0 0 10px #f3c6f1;
+      z-index: 1000;
     }
-
-    #taskInput {
-      width: calc(100% - 100px);
-      padding: 10px;
-      border: none;
-      background: #e0f7fa;
-      border-radius: 8px;
-      font-size: 1rem;
-    }
-
-    #addBtn {
-      padding: 10px;
-      background: #b2dfdb;
-      border: none;
-      border-radius: 8px;
-      margin-left: 10px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    ul {
-      margin-top: 20px;
-      list-style: none;
-    }
-
-    li {
-      background: #ede7f6;
-      padding: 10px;
-      border-radius: 10px;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-    }
-
-    li.done {
-      text-decoration: line-through;
-      background: #e6f7e6;
-      color: #888;
-    }
-
-    li input[type="checkbox"] {
-      margin-right: 10px;
-      transform: scale(1.3);
-    }
-</style>  
+  </style>
 </head>
 <body>
   <h1>My To-Do List</h1>
   <div class="main">
-    <!-- Left Panel -->
     <div class="left">
       <div id="clock">Loading time...</div>
       <div class="calendar-section">
@@ -242,19 +198,15 @@ body {
         <div class="affirmation-log" id="affirmationLog"></div>
       </div>
     </div>
-
-    <!-- Center & Right Merged Panel -->
     <div class="tasks">
-      <div style="display: flex;">
+      <div style="display: flex; flex-wrap: wrap;">
         <input type="text" id="taskInput" placeholder="Add a task...">
         <button id="addBtn">Add</button>
       </div>
       <ul id="taskList"></ul>
-
       <div class="bottom-right-quote">
         <div class="quote">
-          "Let your dreams be bigger than your fears,
-          and your actions louder than your words."
+          "Let your dreams be bigger than your fears,<br>and your actions louder than your words."
         </div>
         <div class="signature">This quote is for you, by Arsh ✨</div>
       </div>
@@ -263,6 +215,7 @@ body {
 
   <div class="affirmation-center" id="popupAffirmation"></div>
   <div class="quote-popup" id="quotePopup"></div>
+  <div class="floating-text">Dreams into Reality</div>
 
   <script>
     function updateClock() {
@@ -274,7 +227,6 @@ body {
     setInterval(updateClock, 1000);
     updateClock();
 
-    // Calendar with affirmation
     const calendarContainer = document.getElementById('calendar');
     const popup = document.getElementById('popupAffirmation');
     const log = document.getElementById('affirmationLog');
@@ -320,7 +272,6 @@ body {
       calendarContainer.appendChild(day);
     }
 
-    // Task logic
     const taskInput = document.getElementById('taskInput');
     const taskList = document.getElementById('taskList');
     const addBtn = document.getElementById('addBtn');
@@ -350,6 +301,5 @@ body {
       taskInput.value = '';
     };
   </script>
-  <div class="floating-text">Dreams into Reality</div>
 </body>
 </html>
