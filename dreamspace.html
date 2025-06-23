@@ -11,28 +11,32 @@
       padding: 0;
       box-sizing: border-box;
     }
+.floating-text {
+  position: fixed;
+  top: 40px;
+  right: 40px;
+  font-size: 1.8rem;
+  font-family: 'Playfair Display', cursive;
+  color: #dda0dd; /* pastel lavender */
+  text-shadow: 0 0 10px #f3c6f1, 0 0 20px #f3c6f1;
+  opacity: 0.9;
+  animation: floatUpDown 4s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1000;
+}
 
-    .floating-text {
-      position: fixed;
-      top: 40px;
-      right: 40px;
-      font-size: 1.8rem;
-      font-family: 'Playfair Display', cursive;
-      color: #dda0dd;
-      text-shadow: 0 0 10px #f3c6f1, 0 0 20px #f3c6f1;
-      opacity: 0.9;
-      animation: floatUpDown 4s ease-in-out infinite;
-      pointer-events: none;
-      z-index: 1000;
-    }
-
-    @keyframes floatUpDown {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-      100% { transform: translateY(0); }
-    }
-
-    body {
+@keyframes floatUpDown {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+body {
       font-family: 'Quicksand', sans-serif;
       background: linear-gradient(to right, #e0f7fa, #fce4ec);
       display: flex;
@@ -42,13 +46,11 @@
       color: #444;
       min-height: 100vh;
     }
-
     h1 {
       font-family: 'Playfair Display', serif;
       font-size: 2.7rem;
       color: #e28aa5;
       margin-bottom: 20px;
-      text-align: center;
     }
 
     .main {
@@ -71,6 +73,9 @@
     }
 
     .tasks {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
       position: relative;
     }
 
@@ -99,8 +104,12 @@
     }
 
     @keyframes glow {
-      from { text-shadow: 0 0 10px #ffb6c1; }
-      to { text-shadow: 0 0 20px #e91e63; }
+      from {
+        text-shadow: 0 0 10px #ffb6c1;
+      }
+      to {
+        text-shadow: 0 0 20px #e91e63;
+      }
     }
 
     .calendar-section {
@@ -139,7 +148,9 @@
       transition: 0.3s;
     }
 
-    .day:hover { background: #b2ebf2; }
+    .day:hover {
+      background: #b2ebf2;
+    }
 
     .locked {
       pointer-events: none;
@@ -216,51 +227,12 @@
       margin-right: 10px;
       transform: scale(1.3);
     }
-
-    @media screen and (max-width: 768px) {
-      .main {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-      }
-
-      .left, .tasks {
-        width: 100%;
-      }
-
-      .bottom-right-quote {
-        position: relative;
-        bottom: unset;
-        right: unset;
-        margin-top: 20px;
-        text-align: center;
-      }
-
-      .floating-text {
-        font-size: 1.2rem;
-        right: 20px;
-        top: 20px;
-      }
-
-      h1 {
-        font-size: 2rem;
-      }
-
-      #taskInput {
-        width: 100%;
-        margin-bottom: 10px;
-      }
-
-      #addBtn {
-        width: 100%;
-        margin-left: 0;
-      }
-    }
-  </style>
+</style>  
 </head>
 <body>
   <h1>My To-Do List</h1>
   <div class="main">
+    <!-- Left Panel -->
     <div class="left">
       <div id="clock">Loading time...</div>
       <div class="calendar-section">
@@ -270,12 +242,15 @@
         <div class="affirmation-log" id="affirmationLog"></div>
       </div>
     </div>
+
+    <!-- Center & Right Merged Panel -->
     <div class="tasks">
-      <div class="task-input-wrapper">
+      <div style="display: flex;">
         <input type="text" id="taskInput" placeholder="Add a task...">
         <button id="addBtn">Add</button>
       </div>
       <ul id="taskList"></ul>
+
       <div class="bottom-right-quote">
         <div class="quote">
           "Let your dreams be bigger than your fears,
@@ -288,18 +263,18 @@
 
   <div class="affirmation-center" id="popupAffirmation"></div>
   <div class="quote-popup" id="quotePopup"></div>
-  <div class="floating-text">Dreams into Reality</div>
 
   <script>
     function updateClock() {
       const now = new Date();
       const options = { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', second: '2-digit' };
       const timeString = now.toLocaleTimeString('en-US', options);
-      document.getElementById('clock').textContent = `⏰ ${timeString} (IST)`;
+      document.getElementById('clock').textContent = ⏰ ${timeString} (IST);
     }
     setInterval(updateClock, 1000);
     updateClock();
 
+    // Calendar with affirmation
     const calendarContainer = document.getElementById('calendar');
     const popup = document.getElementById('popupAffirmation');
     const log = document.getElementById('affirmationLog');
@@ -345,6 +320,7 @@
       calendarContainer.appendChild(day);
     }
 
+    // Task logic
     const taskInput = document.getElementById('taskInput');
     const taskList = document.getElementById('taskList');
     const addBtn = document.getElementById('addBtn');
@@ -374,8 +350,6 @@
       taskInput.value = '';
     };
   </script>
+  <div class="floating-text">Dreams into Reality</div>
 </body>
 </html>
-
- 
- 
