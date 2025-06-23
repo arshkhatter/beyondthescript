@@ -269,7 +269,7 @@ body {
       const now = new Date();
       const options = { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', second: '2-digit' };
       const timeString = now.toLocaleTimeString('en-US', options);
-      document.getElementById('clock').textContent = ⏰ ${timeString} (IST);
+      document.getElementById('clock').textContent = `⏰ ${timeString} (IST)`;
     }
     setInterval(updateClock, 1000);
     updateClock();
